@@ -1,0 +1,82 @@
+
+import './App.css';
+import { Configuration, OpenAIApi } from "openai";
+import { extendTheme, ChakraProvider } from '@chakra-ui/react';
+import {
+  Box,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
+
+const colors = {
+  brand: {
+    900: '#1a365d',
+    800: '#153e75',
+    700: '#2a69ac',
+  },
+}
+const theme = extendTheme({ colors })
+
+const configuration = new Configuration({
+    organization: "Personal",
+    apiKey: "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",
+});
+const openai = new OpenAIApi(configuration);
+
+async function fetchData() {
+  const response = await openai.listEngines();
+  console.log(response);
+}
+
+//fetchData();
+
+
+// 3. Pass the `theme` prop to the `ChakraProvider`
+function App() {
+  return (
+    <ChakraProvider theme={theme}>
+      <App >
+      <Accordion>
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box as="span" flex='1' textAlign='left'>
+          Section 1 title
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </AccordionPanel>
+  </AccordionItem>
+
+  <AccordionItem>
+    <h2>
+      <AccordionButton>
+        <Box as="span" flex='1' textAlign='left'>
+          Section 2 title
+        </Box>
+        <AccordionIcon />
+      </AccordionButton>
+    </h2>
+    <AccordionPanel pb={4}>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+      veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+      commodo consequat.
+    </AccordionPanel>
+  </AccordionItem>
+</Accordion>
+        </App>
+    </ChakraProvider>
+  )
+}
+
+export default App;
